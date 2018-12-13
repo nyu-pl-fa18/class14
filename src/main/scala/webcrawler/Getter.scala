@@ -23,7 +23,7 @@ class Getter(url: String, depth: Int) extends Actor {
   def receive = {
     case body: String =>
       for (link <- findLinks(body))
-        context.parent ! Controller.Check(link, depth)
+        context.parent ! Controller.Crawl(link, depth)
       stop()
     case _: Status.Failure => stop()
     case Abort             => stop()

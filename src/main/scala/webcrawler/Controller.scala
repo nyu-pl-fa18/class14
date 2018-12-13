@@ -10,7 +10,7 @@ import scala.concurrent.duration._
 import akka.actor.ActorRef
 
 object Controller {
-  case class Check(url: String, depth: Int)
+  case class Crawl(url: String, depth: Int)
   case class Result(links: Set[String])
 }
 
@@ -25,7 +25,7 @@ class Controller extends Actor with ActorLogging {
   def getterProps(url: String, depth: Int): Props = Props(new Getter(url, depth))
   
   def receive = {
-    case Check(url, depth) =>
+    case Crawl(url, depth) =>
       log.debug("{} checking {}", depth, url)
       if (!cache(url) && depth > 0)
         children += context.actorOf(getterProps(url, depth - 1))

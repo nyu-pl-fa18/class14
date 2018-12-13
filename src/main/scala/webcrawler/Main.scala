@@ -11,7 +11,7 @@ class Main extends Actor {
 
   val receptionist = context.actorOf(Props[Receptionist], "receptionist")
   
-  receptionist ! Get("https://cs.nyu.edu/wies/teaching/oop-sp18")
+  receptionist ! Get("https://cs.nyu.edu/wies/teaching/pl-fa18")
   
   context.setReceiveTimeout(10.seconds)
   
